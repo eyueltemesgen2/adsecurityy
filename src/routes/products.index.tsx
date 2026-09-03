@@ -30,7 +30,7 @@ type ProductSearch = {
   maxPrice?: number;
 };
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   validateSearch: (search: Record<string, unknown>): ProductSearch => ({
     search: typeof search.search === "string" && search.search ? search.search : undefined,
     category: typeof search.category === "string" && search.category ? search.category : undefined,
