@@ -19,6 +19,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedCheckoutRouteImport } from './routes/_authenticated/checkout'
+import { Route as AuthenticatedRequestServiceRouteImport } from './routes/_authenticated/request-service'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -74,6 +75,12 @@ const AuthenticatedCheckoutRoute = AuthenticatedCheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRequestServiceRoute =
+  AuthenticatedRequestServiceRouteImport.update({
+    id: '/request-service',
+    path: '/request-service',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/products/',
   path: '/products/',
@@ -110,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/checkout': typeof AuthenticatedCheckoutRoute
+  '/request-service': typeof AuthenticatedRequestServiceRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
@@ -126,6 +134,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/checkout': typeof AuthenticatedCheckoutRoute
+  '/request-service': typeof AuthenticatedRequestServiceRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/products': typeof ProductsIndexRoute
@@ -144,6 +153,7 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/checkout': typeof AuthenticatedCheckoutRoute
+  '/_authenticated/request-service': typeof AuthenticatedRequestServiceRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/reset-password'
     | '/checkout'
+    | '/request-service'
     | '/products/$slug'
     | '/services/$slug'
     | '/products/'
@@ -178,6 +189,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/reset-password'
     | '/checkout'
+    | '/request-service'
     | '/products/$slug'
     | '/services/$slug'
     | '/products'
@@ -195,6 +207,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/reset-password'
     | '/_authenticated/checkout'
+    | '/_authenticated/request-service'
     | '/products/$slug'
     | '/services/$slug'
     | '/products/'
@@ -291,6 +304,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCheckoutRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/request-service': {
+      id: '/_authenticated/request-service'
+      path: '/request-service'
+      fullPath: '/request-service'
+      preLoaderRoute: typeof AuthenticatedRequestServiceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/products/': {
       id: '/products/'
       path: '/products'
@@ -331,10 +351,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCheckoutRoute: typeof AuthenticatedCheckoutRoute
+  AuthenticatedRequestServiceRoute: typeof AuthenticatedRequestServiceRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCheckoutRoute: AuthenticatedCheckoutRoute,
+  AuthenticatedRequestServiceRoute: AuthenticatedRequestServiceRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
