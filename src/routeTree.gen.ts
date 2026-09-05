@@ -24,6 +24,13 @@ import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
+import { Route as AuthenticatedAccountNotificationsRouteImport } from './routes/_authenticated/account.notifications'
+import { Route as AuthenticatedAccountProfileRouteImport } from './routes/_authenticated/account.profile'
+import { Route as AuthenticatedAccountOrdersIndexRouteImport } from './routes/_authenticated/account.orders.index'
+import { Route as AuthenticatedAccountOrdersIdRouteImport } from './routes/_authenticated/account.orders.$id'
+import { Route as AuthenticatedAccountRequestsIndexRouteImport } from './routes/_authenticated/account.requests.index'
+import { Route as AuthenticatedAccountRequestsIdRouteImport } from './routes/_authenticated/account.requests.$id'
 import { Route as ApiPublicFileSplatRouteImport } from './routes/api/public/file/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -101,6 +108,48 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAccountIndexRoute =
+  AuthenticatedAccountIndexRouteImport.update({
+    id: '/account/',
+    path: '/account/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountNotificationsRoute =
+  AuthenticatedAccountNotificationsRouteImport.update({
+    id: '/account/notifications',
+    path: '/account/notifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountProfileRoute =
+  AuthenticatedAccountProfileRouteImport.update({
+    id: '/account/profile',
+    path: '/account/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountOrdersIndexRoute =
+  AuthenticatedAccountOrdersIndexRouteImport.update({
+    id: '/account/orders/',
+    path: '/account/orders/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountOrdersIdRoute =
+  AuthenticatedAccountOrdersIdRouteImport.update({
+    id: '/account/orders/$id',
+    path: '/account/orders/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountRequestsIndexRoute =
+  AuthenticatedAccountRequestsIndexRouteImport.update({
+    id: '/account/requests/',
+    path: '/account/requests/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountRequestsIdRoute =
+  AuthenticatedAccountRequestsIdRouteImport.update({
+    id: '/account/requests/$id',
+    path: '/account/requests/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicFileSplatRoute = ApiPublicFileSplatRouteImport.update({
   id: '/api/public/file/$',
   path: '/api/public/file/$',
@@ -122,7 +171,14 @@ export interface FileRoutesByFullPath {
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/account/notifications': typeof AuthenticatedAccountNotificationsRoute
+  '/account/profile': typeof AuthenticatedAccountProfileRoute
+  '/account/': typeof AuthenticatedAccountIndexRoute
+  '/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
+  '/account/requests/$id': typeof AuthenticatedAccountRequestsIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
+  '/account/orders/': typeof AuthenticatedAccountOrdersIndexRoute
+  '/account/requests/': typeof AuthenticatedAccountRequestsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -139,7 +195,14 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/products': typeof ProductsIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/account/notifications': typeof AuthenticatedAccountNotificationsRoute
+  '/account/profile': typeof AuthenticatedAccountProfileRoute
+  '/account': typeof AuthenticatedAccountIndexRoute
+  '/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
+  '/account/requests/$id': typeof AuthenticatedAccountRequestsIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
+  '/account/orders': typeof AuthenticatedAccountOrdersIndexRoute
+  '/account/requests': typeof AuthenticatedAccountRequestsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -158,7 +221,14 @@ export interface FileRoutesById {
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/_authenticated/account/notifications': typeof AuthenticatedAccountNotificationsRoute
+  '/_authenticated/account/profile': typeof AuthenticatedAccountProfileRoute
+  '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
+  '/_authenticated/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
+  '/_authenticated/account/requests/$id': typeof AuthenticatedAccountRequestsIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
+  '/_authenticated/account/orders/': typeof AuthenticatedAccountOrdersIndexRoute
+  '/_authenticated/account/requests/': typeof AuthenticatedAccountRequestsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -177,7 +247,14 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products/'
     | '/services/'
+    | '/account/notifications'
+    | '/account/profile'
+    | '/account/'
+    | '/account/orders/$id'
+    | '/account/requests/$id'
     | '/api/public/file/$'
+    | '/account/orders/'
+    | '/account/requests/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -194,7 +271,14 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products'
     | '/services'
+    | '/account/notifications'
+    | '/account/profile'
+    | '/account'
+    | '/account/orders/$id'
+    | '/account/requests/$id'
     | '/api/public/file/$'
+    | '/account/orders'
+    | '/account/requests'
   id:
     | '__root__'
     | '/'
@@ -212,7 +296,14 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products/'
     | '/services/'
+    | '/_authenticated/account/notifications'
+    | '/_authenticated/account/profile'
+    | '/_authenticated/account/'
+    | '/_authenticated/account/orders/$id'
+    | '/_authenticated/account/requests/$id'
     | '/api/public/file/$'
+    | '/_authenticated/account/orders/'
+    | '/_authenticated/account/requests/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -339,6 +430,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/account/': {
+      id: '/_authenticated/account/'
+      path: '/account'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AuthenticatedAccountIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/notifications': {
+      id: '/_authenticated/account/notifications'
+      path: '/account/notifications'
+      fullPath: '/account/notifications'
+      preLoaderRoute: typeof AuthenticatedAccountNotificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/profile': {
+      id: '/_authenticated/account/profile'
+      path: '/account/profile'
+      fullPath: '/account/profile'
+      preLoaderRoute: typeof AuthenticatedAccountProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/orders/': {
+      id: '/_authenticated/account/orders/'
+      path: '/account/orders'
+      fullPath: '/account/orders/'
+      preLoaderRoute: typeof AuthenticatedAccountOrdersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/orders/$id': {
+      id: '/_authenticated/account/orders/$id'
+      path: '/account/orders/$id'
+      fullPath: '/account/orders/$id'
+      preLoaderRoute: typeof AuthenticatedAccountOrdersIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/requests/': {
+      id: '/_authenticated/account/requests/'
+      path: '/account/requests'
+      fullPath: '/account/requests/'
+      preLoaderRoute: typeof AuthenticatedAccountRequestsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/requests/$id': {
+      id: '/_authenticated/account/requests/$id'
+      path: '/account/requests/$id'
+      fullPath: '/account/requests/$id'
+      preLoaderRoute: typeof AuthenticatedAccountRequestsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/file/$': {
       id: '/api/public/file/$'
       path: '/api/public/file/$'
@@ -352,11 +492,27 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCheckoutRoute: typeof AuthenticatedCheckoutRoute
   AuthenticatedRequestServiceRoute: typeof AuthenticatedRequestServiceRoute
+  AuthenticatedAccountNotificationsRoute: typeof AuthenticatedAccountNotificationsRoute
+  AuthenticatedAccountProfileRoute: typeof AuthenticatedAccountProfileRoute
+  AuthenticatedAccountIndexRoute: typeof AuthenticatedAccountIndexRoute
+  AuthenticatedAccountOrdersIdRoute: typeof AuthenticatedAccountOrdersIdRoute
+  AuthenticatedAccountRequestsIdRoute: typeof AuthenticatedAccountRequestsIdRoute
+  AuthenticatedAccountOrdersIndexRoute: typeof AuthenticatedAccountOrdersIndexRoute
+  AuthenticatedAccountRequestsIndexRoute: typeof AuthenticatedAccountRequestsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCheckoutRoute: AuthenticatedCheckoutRoute,
   AuthenticatedRequestServiceRoute: AuthenticatedRequestServiceRoute,
+  AuthenticatedAccountNotificationsRoute:
+    AuthenticatedAccountNotificationsRoute,
+  AuthenticatedAccountProfileRoute: AuthenticatedAccountProfileRoute,
+  AuthenticatedAccountIndexRoute: AuthenticatedAccountIndexRoute,
+  AuthenticatedAccountOrdersIdRoute: AuthenticatedAccountOrdersIdRoute,
+  AuthenticatedAccountRequestsIdRoute: AuthenticatedAccountRequestsIdRoute,
+  AuthenticatedAccountOrdersIndexRoute: AuthenticatedAccountOrdersIndexRoute,
+  AuthenticatedAccountRequestsIndexRoute:
+    AuthenticatedAccountRequestsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
