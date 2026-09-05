@@ -24,6 +24,7 @@ import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
 import { Route as ApiPublicFileSplatRouteImport } from './routes/api/public/file/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -101,6 +102,12 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAccountIndexRoute =
+  AuthenticatedAccountIndexRouteImport.update({
+    id: '/account/',
+    path: '/account/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicFileSplatRoute = ApiPublicFileSplatRouteImport.update({
   id: '/api/public/file/$',
   path: '/api/public/file/$',
@@ -122,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/account/': typeof AuthenticatedAccountIndexRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
 }
 export interface FileRoutesByTo {
@@ -139,6 +147,7 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/products': typeof ProductsIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/account': typeof AuthenticatedAccountIndexRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
 }
 export interface FileRoutesById {
@@ -158,6 +167,7 @@ export interface FileRoutesById {
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
 }
 export interface FileRouteTypes {
@@ -177,6 +187,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products/'
     | '/services/'
+    | '/account/'
     | '/api/public/file/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -194,6 +205,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products'
     | '/services'
+    | '/account'
     | '/api/public/file/$'
   id:
     | '__root__'
@@ -212,6 +224,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products/'
     | '/services/'
+    | '/_authenticated/account/'
     | '/api/public/file/$'
   fileRoutesById: FileRoutesById
 }
@@ -339,6 +352,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/account/': {
+      id: '/_authenticated/account/'
+      path: '/account'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AuthenticatedAccountIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/file/$': {
       id: '/api/public/file/$'
       path: '/api/public/file/$'
@@ -352,11 +372,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCheckoutRoute: typeof AuthenticatedCheckoutRoute
   AuthenticatedRequestServiceRoute: typeof AuthenticatedRequestServiceRoute
+  AuthenticatedAccountIndexRoute: typeof AuthenticatedAccountIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCheckoutRoute: AuthenticatedCheckoutRoute,
   AuthenticatedRequestServiceRoute: AuthenticatedRequestServiceRoute,
+  AuthenticatedAccountIndexRoute: AuthenticatedAccountIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
