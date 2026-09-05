@@ -25,6 +25,9 @@ import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
+import { Route as AuthenticatedAccountNotificationsRouteImport } from './routes/_authenticated/account.notifications'
+import { Route as AuthenticatedAccountOrdersIndexRouteImport } from './routes/_authenticated/account.orders.index'
+import { Route as AuthenticatedAccountOrdersIdRouteImport } from './routes/_authenticated/account.orders.$id'
 import { Route as ApiPublicFileSplatRouteImport } from './routes/api/public/file/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -108,6 +111,24 @@ const AuthenticatedAccountIndexRoute =
     path: '/account/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAccountNotificationsRoute =
+  AuthenticatedAccountNotificationsRouteImport.update({
+    id: '/account/notifications',
+    path: '/account/notifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountOrdersIndexRoute =
+  AuthenticatedAccountOrdersIndexRouteImport.update({
+    id: '/account/orders/',
+    path: '/account/orders/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAccountOrdersIdRoute =
+  AuthenticatedAccountOrdersIdRouteImport.update({
+    id: '/account/orders/$id',
+    path: '/account/orders/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicFileSplatRoute = ApiPublicFileSplatRouteImport.update({
   id: '/api/public/file/$',
   path: '/api/public/file/$',
@@ -129,8 +150,11 @@ export interface FileRoutesByFullPath {
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/account/notifications': typeof AuthenticatedAccountNotificationsRoute
   '/account/': typeof AuthenticatedAccountIndexRoute
+  '/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
+  '/account/orders/': typeof AuthenticatedAccountOrdersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -147,8 +171,11 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/products': typeof ProductsIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/account/notifications': typeof AuthenticatedAccountNotificationsRoute
   '/account': typeof AuthenticatedAccountIndexRoute
+  '/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
+  '/account/orders': typeof AuthenticatedAccountOrdersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -167,8 +194,11 @@ export interface FileRoutesById {
   '/services/$slug': typeof ServicesSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/_authenticated/account/notifications': typeof AuthenticatedAccountNotificationsRoute
   '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
+  '/_authenticated/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
+  '/_authenticated/account/orders/': typeof AuthenticatedAccountOrdersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,8 +217,11 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products/'
     | '/services/'
+    | '/account/notifications'
     | '/account/'
+    | '/account/orders/$id'
     | '/api/public/file/$'
+    | '/account/orders/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -205,8 +238,11 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products'
     | '/services'
+    | '/account/notifications'
     | '/account'
+    | '/account/orders/$id'
     | '/api/public/file/$'
+    | '/account/orders'
   id:
     | '__root__'
     | '/'
@@ -224,8 +260,11 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/products/'
     | '/services/'
+    | '/_authenticated/account/notifications'
     | '/_authenticated/account/'
+    | '/_authenticated/account/orders/$id'
     | '/api/public/file/$'
+    | '/_authenticated/account/orders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -359,6 +398,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/account/notifications': {
+      id: '/_authenticated/account/notifications'
+      path: '/account/notifications'
+      fullPath: '/account/notifications'
+      preLoaderRoute: typeof AuthenticatedAccountNotificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/orders/': {
+      id: '/_authenticated/account/orders/'
+      path: '/account/orders'
+      fullPath: '/account/orders/'
+      preLoaderRoute: typeof AuthenticatedAccountOrdersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account/orders/$id': {
+      id: '/_authenticated/account/orders/$id'
+      path: '/account/orders/$id'
+      fullPath: '/account/orders/$id'
+      preLoaderRoute: typeof AuthenticatedAccountOrdersIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/file/$': {
       id: '/api/public/file/$'
       path: '/api/public/file/$'
@@ -372,13 +432,20 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCheckoutRoute: typeof AuthenticatedCheckoutRoute
   AuthenticatedRequestServiceRoute: typeof AuthenticatedRequestServiceRoute
+  AuthenticatedAccountNotificationsRoute: typeof AuthenticatedAccountNotificationsRoute
   AuthenticatedAccountIndexRoute: typeof AuthenticatedAccountIndexRoute
+  AuthenticatedAccountOrdersIdRoute: typeof AuthenticatedAccountOrdersIdRoute
+  AuthenticatedAccountOrdersIndexRoute: typeof AuthenticatedAccountOrdersIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCheckoutRoute: AuthenticatedCheckoutRoute,
   AuthenticatedRequestServiceRoute: AuthenticatedRequestServiceRoute,
+  AuthenticatedAccountNotificationsRoute:
+    AuthenticatedAccountNotificationsRoute,
   AuthenticatedAccountIndexRoute: AuthenticatedAccountIndexRoute,
+  AuthenticatedAccountOrdersIdRoute: AuthenticatedAccountOrdersIdRoute,
+  AuthenticatedAccountOrdersIndexRoute: AuthenticatedAccountOrdersIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
