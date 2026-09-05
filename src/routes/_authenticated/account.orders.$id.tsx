@@ -8,7 +8,7 @@ import { MediaImage } from "@/components/site/Media";
 import { EmptyState } from "@/components/site/EmptyState";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { formatPrice, ORDER_STATUS_FLOW } from "@/lib/db-types";
+import { formatPrice, ORDER_STATUSES } from "@/lib/db-types";
 
 export const Route = createFileRoute("/_authenticated/account/orders/$id")({
   head: () => ({
@@ -53,7 +53,7 @@ function OrderDetail() {
     );
   }
 
-  const flow = ORDER_STATUS_FLOW;
+  const flow = ORDER_STATUSES.filter((s) => s !== "cancelled");
   const currentIndex = flow.indexOf(order.status as (typeof flow)[number]);
 
   return (
