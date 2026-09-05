@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_authenticated/account/")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: AccountDashboard;
+  component: AccountDashboard,
 });
 
 function AccountDashboard() {
