@@ -27,6 +27,7 @@ import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
 import { Route as AuthenticatedAccountNotificationsRouteImport } from './routes/_authenticated/account.notifications'
 import { Route as AuthenticatedAccountProfileRouteImport } from './routes/_authenticated/account.profile'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAccountOrdersIndexRouteImport } from './routes/_authenticated/account.orders.index'
 import { Route as AuthenticatedAccountOrdersIdRouteImport } from './routes/_authenticated/account.orders.$id'
 import { Route as AuthenticatedAccountRequestsIndexRouteImport } from './routes/_authenticated/account.requests.index'
@@ -126,6 +127,11 @@ const AuthenticatedAccountProfileRoute =
     path: '/account/profile',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAccountOrdersIndexRoute =
   AuthenticatedAccountOrdersIndexRouteImport.update({
     id: '/account/orders/',
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/account/notifications': typeof AuthenticatedAccountNotificationsRoute
   '/account/profile': typeof AuthenticatedAccountProfileRoute
   '/account/': typeof AuthenticatedAccountIndexRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
   '/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
   '/account/requests/$id': typeof AuthenticatedAccountRequestsIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/account/notifications': typeof AuthenticatedAccountNotificationsRoute
   '/account/profile': typeof AuthenticatedAccountProfileRoute
   '/account': typeof AuthenticatedAccountIndexRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
   '/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
   '/account/requests/$id': typeof AuthenticatedAccountRequestsIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
@@ -224,6 +232,7 @@ export interface FileRoutesById {
   '/_authenticated/account/notifications': typeof AuthenticatedAccountNotificationsRoute
   '/_authenticated/account/profile': typeof AuthenticatedAccountProfileRoute
   '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/account/orders/$id': typeof AuthenticatedAccountOrdersIdRoute
   '/_authenticated/account/requests/$id': typeof AuthenticatedAccountRequestsIdRoute
   '/api/public/file/$': typeof ApiPublicFileSplatRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/account/notifications'
     | '/account/profile'
     | '/account/'
+    | '/admin/'
     | '/account/orders/$id'
     | '/account/requests/$id'
     | '/api/public/file/$'
@@ -274,6 +284,7 @@ export interface FileRouteTypes {
     | '/account/notifications'
     | '/account/profile'
     | '/account'
+    | '/admin'
     | '/account/orders/$id'
     | '/account/requests/$id'
     | '/api/public/file/$'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/_authenticated/account/notifications'
     | '/_authenticated/account/profile'
     | '/_authenticated/account/'
+    | '/_authenticated/admin/'
     | '/_authenticated/account/orders/$id'
     | '/_authenticated/account/requests/$id'
     | '/api/public/file/$'
@@ -451,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/account/orders/': {
       id: '/_authenticated/account/orders/'
       path: '/account/orders'
@@ -495,6 +514,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAccountNotificationsRoute: typeof AuthenticatedAccountNotificationsRoute
   AuthenticatedAccountProfileRoute: typeof AuthenticatedAccountProfileRoute
   AuthenticatedAccountIndexRoute: typeof AuthenticatedAccountIndexRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAccountOrdersIdRoute: typeof AuthenticatedAccountOrdersIdRoute
   AuthenticatedAccountRequestsIdRoute: typeof AuthenticatedAccountRequestsIdRoute
   AuthenticatedAccountOrdersIndexRoute: typeof AuthenticatedAccountOrdersIndexRoute
@@ -508,6 +528,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedAccountNotificationsRoute,
   AuthenticatedAccountProfileRoute: AuthenticatedAccountProfileRoute,
   AuthenticatedAccountIndexRoute: AuthenticatedAccountIndexRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   AuthenticatedAccountOrdersIdRoute: AuthenticatedAccountOrdersIdRoute,
   AuthenticatedAccountRequestsIdRoute: AuthenticatedAccountRequestsIdRoute,
   AuthenticatedAccountOrdersIndexRoute: AuthenticatedAccountOrdersIndexRoute,
