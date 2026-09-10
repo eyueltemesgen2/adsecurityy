@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bell, LogOut, Menu, Search, ShoppingCart, User2, X } from "lucide-react";
+import { Bell, LogOut, Menu, Moon, Search, ShoppingCart, Sun, User2, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { useSite } from "@/lib/site-context";
 import { useAuth } from "@/hooks/use-auth";
+import { useTheme } from "@/hooks/use-theme";
 import { useCart } from "@/hooks/use-cart";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ export function SiteHeader() {
   const { navigation, announcement } = useSite();
   const { user } = useAuth();
   const { count } = useCart();
+  const { resolved, toggle } = useTheme();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -129,6 +131,10 @@ export function SiteHeader() {
               />
             </div>
           </form>
+
+          <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={toggle} className="shrink-0">
+            {resolved === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
 
           <Button asChild variant="ghost" size="icon" aria-label="Cart" className="relative">
             <Link to="/cart">
@@ -238,6 +244,10 @@ export function SiteHeader() {
                   ))}
                 </nav>
                 <div className="flex flex-col gap-2">
+                  <Button variant="outline" className="h-11" onClick={toggle}>
+                    {resolved === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
+                    {resolved === "dark" ? "Light mode" : "Dark mode"}
+                  </Button>
                   <Button asChild className="h-11 bg-accent text-accent-foreground hover:bg-accent/90">
                     <Link to="/request-service">Request Service</Link>
                   </Button>

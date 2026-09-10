@@ -92,12 +92,12 @@ function AdminDashboardPage() {
               <div className="mt-4 h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={query.data!.series}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                     <XAxis dataKey="month" fontSize={11} />
                     <YAxis fontSize={11} allowDecimals={false} />
                     <Tooltip />
-                    <Bar dataKey="orders" fill="hsl(var(--primary))" name="Orders" />
-                    <Bar dataKey="requests" fill="hsl(var(--accent))" name="Requests" />
+                    <Bar dataKey="orders" fill="var(--color-primary)" name="Orders" />
+                    <Bar dataKey="requests" fill="var(--color-accent)" name="Requests" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -107,12 +107,12 @@ function AdminDashboardPage() {
               <div className="mt-4 h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={query.data!.series}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                     <XAxis dataKey="month" fontSize={11} />
                     <YAxis fontSize={11} />
                     <Tooltip />
-                    <Line type="monotone" dataKey="revenue" stroke="hsl(var(--accent))" name="Revenue" />
-                    <Line type="monotone" dataKey="customers" stroke="hsl(var(--primary))" name="Customers" />
+                    <Line type="monotone" dataKey="revenue" stroke="var(--color-accent)" name="Revenue" />
+                    <Line type="monotone" dataKey="customers" stroke="var(--color-primary)" name="Customers" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

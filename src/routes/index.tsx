@@ -86,8 +86,9 @@ function Home() {
         <div className="absolute inset-0 opacity-25">
           <MediaImage src={hero?.image_url} alt="" className="h-full w-full" />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/95 to-transparent" />
         <div className="relative container-page grid gap-10 py-16 sm:py-24 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 animate-slide-up">
             <p className="eyebrow text-accent">{hero?.subtitle ?? "Security & Technology Solutions"}</p>
             <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
               {hero?.title ?? "Protect what matters with professionally installed security systems"}
@@ -96,7 +97,7 @@ function Home() {
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-surface-foreground/80">{hero.body}</p>
             ) : null}
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 transition-transform hover:scale-[1.02]">
                 <Link to="/request-service">{hero?.cta_label ?? "Request a free survey"}</Link>
               </Button>
               <Button
@@ -172,9 +173,9 @@ function Home() {
                 key={service.id}
                 to="/services/$slug"
                 params={{ slug: service.slug }}
-                className="group flex flex-col border border-border bg-card p-6 transition-colors hover:border-accent/60"
+                className="group flex flex-col border border-border bg-card p-6 transition-all duration-300 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/5"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-secondary text-accent">
+                <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-secondary text-accent transition-transform duration-300 group-hover:scale-110">
                   <Wrench className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 text-base font-semibold">{service.name}</h3>
