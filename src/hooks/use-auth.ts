@@ -14,6 +14,15 @@ export function useAuth(): AuthState {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (
+      !import.meta.env['VITE_SUPABASE_URL'] &&
+      !import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] &&
+      !process.env['SUPABASE_URL'] &&
+      !process.env['SUPABASE_PUBLISHABLE_KEY']
+    ) {
+      setLoading(false);
+      return;
+    }
     let active = true;
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       if (!active) return;

@@ -12,4 +12,13 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      // The sandbox preview hosts proxy a Host header Vite doesn't know.
+
+
+
+      allowedHosts: ["work-1-hvapxexflaqnbmoi.prod-runtime.all-hands.dev", "work-2-hvapxexflaqnbmoi.prod-runtime.all-hands.dev"],
+    },
+  },
 });
