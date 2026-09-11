@@ -97,10 +97,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { title },
         { name: "description", content: description },
+        {
+          name: "keywords",
+          content:
+            "CCTV, security cameras, surveillance, access control, time attendance, video intercom, networking, IT solutions, camera installation",
+        },
+        { name: "robots", content: "index, follow" },
         { property: "og:site_name", content: site?.branding.company_name ?? "AD Security Camera Solution" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "theme-color", content: "#12324f" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "theme-color", content: "#0b1220" },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
@@ -126,7 +136,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="bg-background" suppressHydrationWarning>
       <head>
         <HeadContent />
         <script

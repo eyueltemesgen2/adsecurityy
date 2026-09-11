@@ -108,8 +108,9 @@ export function SiteHeader() {
               <a
                 key={item.id}
                 href={item.url}
-                className={`rounded-sm px-3 py-2 text-sm font-semibold transition-colors hover:bg-secondary ${
-                  pathname === item.url ? "text-accent" : "text-foreground"
+                aria-current={pathname === item.url ? "page" : undefined}
+                className={`relative rounded-sm px-3 py-2 text-sm font-semibold transition-colors after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:origin-left after:scale-x-0 after:bg-accent after:transition-transform hover:text-accent hover:after:scale-x-100 ${
+                  pathname === item.url ? "text-accent after:scale-x-100" : "text-foreground"
                 }`}
               >
                 {item.label}
@@ -203,7 +204,10 @@ export function SiteHeader() {
             </Button>
           )}
 
-          <Button asChild className="hidden bg-accent text-accent-foreground hover:bg-accent/90 md:inline-flex">
+          <Button
+            asChild
+            className="hidden bg-accent text-accent-foreground shadow-sm shadow-accent/20 transition-transform hover:scale-[1.03] hover:bg-accent/90 md:inline-flex"
+          >
             <Link to="/request-service">Request Service</Link>
           </Button>
 

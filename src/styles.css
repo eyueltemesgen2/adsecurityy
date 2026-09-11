@@ -6,7 +6,7 @@
 
 /*
  * AD Security Camera Solution design system.
- * Industrial security palette: deep steel navy, graphite surfaces, signal orange.
+ * Premium security palette: near-black navy surfaces, cool graphite, signal red.
  * All colors are semantic tokens. Never hardcode colors in components.
  */
 
@@ -62,64 +62,64 @@
 
 :root {
   --radius: 0.25rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.22 0.02 250);
+  --background: oklch(0.99 0.003 250);
+  --foreground: oklch(0.2 0.022 255);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 250);
+  --card-foreground: oklch(0.2 0.022 255);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 250);
-  /* deep steel navy */
-  --primary: oklch(0.32 0.055 248);
+  --popover-foreground: oklch(0.2 0.022 255);
+  /* near-black navy */
+  --primary: oklch(0.22 0.03 258);
   --primary-foreground: oklch(0.98 0.005 250);
-  --secondary: oklch(0.96 0.008 250);
-  --secondary-foreground: oklch(0.32 0.055 248);
-  --muted: oklch(0.965 0.006 250);
-  --muted-foreground: oklch(0.5 0.02 250);
-  /* signal orange */
-  --accent: oklch(0.6 0.185 41);
-  --accent-foreground: oklch(0.99 0.01 60);
-  --destructive: oklch(0.55 0.21 27);
+  --secondary: oklch(0.965 0.006 255);
+  --secondary-foreground: oklch(0.24 0.03 258);
+  --muted: oklch(0.965 0.006 255);
+  --muted-foreground: oklch(0.5 0.02 255);
+  /* signal red */
+  --accent: oklch(0.56 0.222 27);
+  --accent-foreground: oklch(0.99 0.01 20);
+  --destructive: oklch(0.56 0.222 27);
   --destructive-foreground: oklch(0.99 0.005 250);
   --success: oklch(0.55 0.13 155);
   --success-foreground: oklch(0.99 0.005 250);
   --warning: oklch(0.72 0.15 75);
   --warning-foreground: oklch(0.25 0.03 75);
-  --border: oklch(0.9 0.008 250);
-  --input: oklch(0.9 0.008 250);
-  --ring: oklch(0.6 0.185 41);
-  --surface: oklch(0.24 0.035 250);
+  --border: oklch(0.9 0.008 255);
+  --input: oklch(0.9 0.008 255);
+  --ring: oklch(0.56 0.222 27);
+  --surface: oklch(0.17 0.025 258);
   --surface-foreground: oklch(0.97 0.005 250);
-  --chart-1: oklch(0.32 0.055 248);
-  --chart-2: oklch(0.6 0.185 41);
+  --chart-1: oklch(0.22 0.03 258);
+  --chart-2: oklch(0.56 0.222 27);
   --chart-3: oklch(0.55 0.13 155);
-  --chart-4: oklch(0.6 0.06 250);
+  --chart-4: oklch(0.6 0.06 255);
   --chart-5: oklch(0.72 0.15 75);
-  --sidebar: oklch(0.24 0.035 250);
+  --sidebar: oklch(0.17 0.025 258);
   --sidebar-foreground: oklch(0.95 0.005 250);
-  --sidebar-primary: oklch(0.6 0.185 41);
-  --sidebar-primary-foreground: oklch(0.99 0.01 60);
-  --sidebar-accent: oklch(0.3 0.04 250);
+  --sidebar-primary: oklch(0.56 0.222 27);
+  --sidebar-primary-foreground: oklch(0.99 0.01 20);
+  --sidebar-accent: oklch(0.24 0.03 258);
   --sidebar-accent-foreground: oklch(0.98 0.005 250);
-  --sidebar-border: oklch(0.32 0.04 250);
-  --sidebar-ring: oklch(0.6 0.185 41);
+  --sidebar-border: oklch(0.28 0.03 258);
+  --sidebar-ring: oklch(0.56 0.222 27);
 }
 
 .dark {
-  --background: oklch(0.19 0.025 250);
+  --background: oklch(0.15 0.022 258);
   --foreground: oklch(0.97 0.005 250);
-  --card: oklch(0.23 0.03 250);
+  --card: oklch(0.19 0.026 258);
   --card-foreground: oklch(0.97 0.005 250);
-  --popover: oklch(0.23 0.03 250);
+  --popover: oklch(0.19 0.026 258);
   --popover-foreground: oklch(0.97 0.005 250);
-  --primary: oklch(0.9 0.02 250);
-  --primary-foreground: oklch(0.22 0.03 250);
-  --secondary: oklch(0.28 0.03 250);
+  --primary: oklch(0.92 0.015 255);
+  --primary-foreground: oklch(0.18 0.026 258);
+  --secondary: oklch(0.24 0.028 258);
   --secondary-foreground: oklch(0.97 0.005 250);
-  --muted: oklch(0.28 0.03 250);
-  --muted-foreground: oklch(0.72 0.02 250);
-  --accent: oklch(0.65 0.18 41);
-  --accent-foreground: oklch(0.15 0.02 60);
-  --destructive: oklch(0.65 0.19 25);
+  --muted: oklch(0.24 0.028 258);
+  --muted-foreground: oklch(0.72 0.02 255);
+  --accent: oklch(0.62 0.215 27);
+  --accent-foreground: oklch(0.99 0.01 20);
+  --destructive: oklch(0.62 0.215 27);
   --destructive-foreground: oklch(0.98 0.005 250);
   --success: oklch(0.65 0.13 155);
   --success-foreground: oklch(0.15 0.02 155);
@@ -127,17 +127,17 @@
   --warning-foreground: oklch(0.2 0.03 75);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.65 0.18 41);
-  --surface: oklch(0.16 0.02 250);
+  --ring: oklch(0.62 0.215 27);
+  --surface: oklch(0.12 0.02 258);
   --surface-foreground: oklch(0.97 0.005 250);
-  --sidebar: oklch(0.16 0.02 250);
+  --sidebar: oklch(0.12 0.02 258);
   --sidebar-foreground: oklch(0.95 0.005 250);
-  --sidebar-primary: oklch(0.65 0.18 41);
-  --sidebar-primary-foreground: oklch(0.15 0.02 60);
-  --sidebar-accent: oklch(0.24 0.03 250);
+  --sidebar-primary: oklch(0.62 0.215 27);
+  --sidebar-primary-foreground: oklch(0.99 0.01 20);
+  --sidebar-accent: oklch(0.2 0.026 258);
   --sidebar-accent-foreground: oklch(0.98 0.005 250);
   --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.65 0.18 41);
+  --sidebar-ring: oklch(0.62 0.215 27);
 }
 
 @layer base {
@@ -168,10 +168,26 @@
     animation: fadeIn 0.4s ease-out forwards;
   }
   .animate-slide-up {
-    animation: slideUp 0.5s ease-out forwards;
+    animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   .animate-scale-in {
     animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  /* Scroll/entrance reveal. Pair with inline animation-delay for staggering. */
+  .reveal {
+    opacity: 0;
+    animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-scale-in,
+    .reveal {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 }
 
@@ -181,13 +197,49 @@
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.live-dot {
+  position: relative;
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-accent);
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot::after {
+    animation: none;
+  }
+}
+
+/* Subtle technical grid backdrop for dark surfaces. */
+@utility grid-backdrop {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
 
 @utility container-page {

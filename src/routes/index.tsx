@@ -18,6 +18,9 @@ import { MediaImage } from "@/components/site/Media";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
+const HERO_FALLBACK = "/images/hero-security.png";
+const OPERATIONS_FALLBACK = "/images/security-operations.png";
+
 const homeQuery = queryOptions({ queryKey: ["homepage"], queryFn: () => getHomepage() });
 
 export const Route = createFileRoute("/")({
@@ -79,52 +82,88 @@ function Home() {
   const process = find("process") ?? find("how_it_works");
   const cta = find("cta") ?? find("final_cta");
 
+  const heroStats = items(hero).slice(0, 4);
+
   return (
     <PublicLayout>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-surface text-surface-foreground">
-        <div className="absolute inset-0 opacity-25">
-          <MediaImage src={hero?.image_url} alt="" className="h-full w-full" />
+      <section className="relative isolate overflow-hidden bg-surface text-surface-foreground">
+        <div className="absolute inset-0">
+          <MediaImage
+            src={hero?.image_url ?? HERO_FALLBACK}
+            alt=""
+            loading="eager"
+            className="h-full w-full"
+            imgClassName="scale-105"
+          />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/95 to-transparent" />
-        <div className="relative container-page grid gap-10 py-16 sm:py-24 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7 animate-slide-up">
-            <p className="eyebrow text-accent">{hero?.subtitle ?? "Security & Technology Solutions"}</p>
-            <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/92 to-surface/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-surface/60" />
+        <div className="grid-backdrop absolute inset-0 opacity-60" />
+        {/* red edge glow */}
+        <div className="pointer-events-none absolute -right-24 top-1/3 h-72 w-72 rounded-full bg-accent/25 blur-[120px]" />
+
+        <div className="relative container-page grid gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:items-center lg:py-32">
+          <div className="lg:col-span-7">
+            <div className="reveal inline-flex items-center gap-2.5 rounded-full border border-surface-foreground/15 bg-surface-foreground/5 px-3.5 py-1.5 text-xs font-semibold backdrop-blur">
+              <span className="live-dot" aria-hidden="true" />
+              <span className="uppercase tracking-[0.14em]">24/7 Monitoring & Support</span>
+            </div>
+            <h1
+              className="reveal mt-6 max-w-3xl text-pretty text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.6rem]"
+              style={{ animationDelay: "80ms" }}
+            >
               {hero?.title ?? "Protect what matters with professionally installed security systems"}
             </h1>
             {hero?.body ? (
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-surface-foreground/80">{hero.body}</p>
+              <p
+                className="reveal mt-6 max-w-2xl text-base leading-relaxed text-surface-foreground/80 sm:text-lg"
+                style={{ animationDelay: "160ms" }}
+              >
+                {hero.body}
+              </p>
             ) : null}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 transition-transform hover:scale-[1.02]">
-                <Link to="/request-service">{hero?.cta_label ?? "Request a free survey"}</Link>
+            <p
+              className="reveal eyebrow mt-6 text-accent"
+              style={{ animationDelay: "160ms" }}
+            >
+              {hero?.subtitle ?? "Security & Technology Solutions"}
+            </p>
+            <div className="reveal mt-8 flex flex-wrap gap-3" style={{ animationDelay: "240ms" }}>
+              <Button
+                asChild
+                size="lg"
+                className="bg-accent text-accent-foreground shadow-lg shadow-accent/25 transition-transform hover:scale-[1.03] hover:bg-accent/90"
+              >
+                <Link to="/request-service">
+                  {hero?.cta_label ?? "Request a free survey"}
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-surface-foreground/30 bg-transparent text-surface-foreground hover:bg-surface-foreground/10"
+                className="border-surface-foreground/25 bg-surface-foreground/5 text-surface-foreground backdrop-blur hover:bg-surface-foreground/10"
               >
                 <Link to="/products">{hero?.cta2_label ?? "Shop equipment"}</Link>
               </Button>
             </div>
           </div>
-          {items(hero).length ? (
-            <div className="grid gap-3 sm:grid-cols-2 lg:col-span-5">
-              {items(hero)
-                .slice(0, 4)
-                .map((item, index) => (
-                  <div
-                    key={index}
-                    className="rounded-sm border border-surface-foreground/15 bg-surface-foreground/5 p-4"
-                  >
-                    <p className="font-display text-2xl font-bold text-accent">{item.value ?? item.title}</p>
-                    <p className="mt-1 text-xs uppercase tracking-wide text-surface-foreground/70">
-                      {item.label ?? item.description}
-                    </p>
-                  </div>
-                ))}
+
+          {heroStats.length ? (
+            <div className="reveal grid gap-3 sm:grid-cols-2 lg:col-span-5" style={{ animationDelay: "320ms" }}>
+              {heroStats.map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-md border border-surface-foreground/15 bg-surface-foreground/[0.06] p-5 backdrop-blur transition-colors hover:border-accent/50"
+                >
+                  <p className="font-display text-3xl font-bold text-accent">{item.value ?? item.title}</p>
+                  <p className="mt-1.5 text-xs uppercase tracking-wide text-surface-foreground/70">
+                    {item.label ?? item.description}
+                  </p>
+                </div>
+              ))}
             </div>
           ) : null}
         </div>
@@ -137,8 +176,10 @@ function Home() {
             {items(trust).map((item, index) => {
               const Icon = ICONS[item.icon ?? ""] ?? BadgeCheck;
               return (
-                <div key={index} className="flex gap-3">
-                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <div key={index} className="flex gap-3.5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent/10 text-accent">
+                    <Icon className="h-5 w-5" />
+                  </span>
                   <div>
                     <p className="text-sm font-semibold">{item.title}</p>
                     {item.description ? (
@@ -154,7 +195,7 @@ function Home() {
 
       {/* Services */}
       {data.services.length ? (
-        <section className="container-page py-16 sm:py-20">
+        <section className="container-page py-16 sm:py-24">
           <SectionHeading
             eyebrow={servicesSection?.subtitle ?? "What we do"}
             title={servicesSection?.title ?? "Our services"}
@@ -167,20 +208,23 @@ function Home() {
               </Button>
             }
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {data.services.map((service) => (
               <Link
                 key={service.id}
                 to="/services/$slug"
                 params={{ slug: service.slug }}
-                className="group flex flex-col border border-border bg-card p-6 transition-all duration-300 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/5"
+                className="group relative flex flex-col overflow-hidden rounded-md border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-secondary text-accent transition-transform duration-300 group-hover:scale-110">
+                <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="flex h-11 w-11 items-center justify-center rounded-md bg-secondary text-accent transition-transform duration-300 group-hover:scale-110">
                   <Wrench className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 text-base font-semibold">{service.name}</h3>
-                <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{service.short_description}</p>
-                <span className="mt-4 inline-flex items-center text-sm font-semibold text-accent">
+                <h3 className="mt-5 text-base font-semibold">{service.name}</h3>
+                <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {service.short_description}
+                </p>
+                <span className="mt-5 inline-flex items-center text-sm font-semibold text-accent">
                   Learn more <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
@@ -191,7 +235,7 @@ function Home() {
 
       {/* Featured products */}
       {data.products.length ? (
-        <section className="bg-secondary/50 py-16 sm:py-20">
+        <section className="bg-secondary/50 py-16 sm:py-24">
           <div className="container-page">
             <SectionHeading
               eyebrow={productsSection?.subtitle ?? "Equipment"}
@@ -205,7 +249,7 @@ function Home() {
                 </Button>
               }
             />
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {(data.products as unknown as ProductWithCategory[]).slice(0, 8).map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -216,15 +260,18 @@ function Home() {
 
       {/* Installation */}
       {installation ? (
-        <section className="container-page grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2">
-          <MediaImage
-            src={installation.image_url}
-            alt={installation.title ?? "Installation"}
-            className="aspect-[4/3] w-full rounded-sm"
-          />
+        <section className="container-page grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-2">
+          <div className="relative">
+            <div className="absolute -inset-3 -z-10 rounded-lg bg-accent/10 blur-xl" aria-hidden="true" />
+            <MediaImage
+              src={installation.image_url ?? OPERATIONS_FALLBACK}
+              alt={installation.title ?? "Installation"}
+              className="aspect-[4/3] w-full rounded-md border border-border"
+            />
+          </div>
           <div>
             <p className="eyebrow text-accent">{installation.subtitle ?? "Installation"}</p>
-            <h2 className="mt-2 text-2xl font-bold sm:text-3xl">{installation.title}</h2>
+            <h2 className="mt-2 text-2xl font-bold text-balance sm:text-3xl">{installation.title}</h2>
             {installation.body ? (
               <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">{installation.body}</p>
             ) : null}
@@ -252,20 +299,27 @@ function Home() {
 
       {/* Why us */}
       {items(why).length ? (
-        <section className="bg-surface py-16 text-surface-foreground sm:py-20">
-          <div className="container-page">
+        <section className="relative isolate overflow-hidden bg-surface py-16 text-surface-foreground sm:py-24">
+          <div className="grid-backdrop absolute inset-0 opacity-40" aria-hidden="true" />
+          <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-accent/15 blur-[120px]" />
+          <div className="relative container-page">
             <SectionHeading
               eyebrow={why?.subtitle ?? "Why choose us"}
               title={why?.title ?? "Built on expertise and accountability"}
               subtitle={why?.body}
               align="center"
             />
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {items(why).map((item, index) => (
-                <div key={index} className="rounded-sm border border-surface-foreground/15 bg-surface-foreground/5 p-6">
-                  <ShieldCheck className="h-5 w-5 text-accent" />
-                  <h3 className="mt-3 text-base font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm text-surface-foreground/75">{item.description}</p>
+                <div
+                  key={index}
+                  className="rounded-md border border-surface-foreground/15 bg-surface-foreground/[0.06] p-6 backdrop-blur transition-colors hover:border-accent/50"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-accent/15 text-accent">
+                    <ShieldCheck className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 text-base font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-surface-foreground/75">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -275,20 +329,20 @@ function Home() {
 
       {/* Process */}
       {items(process).length ? (
-        <section className="container-page py-16 sm:py-20">
+        <section className="container-page py-16 sm:py-24">
           <SectionHeading
             eyebrow={process?.subtitle ?? "Process"}
             title={process?.title ?? "How it works"}
             subtitle={process?.body}
           />
-          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {items(process).map((item, index) => (
-              <li key={index} className="border-t-2 border-accent pt-4">
+              <li key={index} className="relative border-t-2 border-accent pt-4">
                 <span className="font-display text-sm font-bold text-accent">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-2 text-base font-semibold">{item.title}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{item.description}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
               </li>
             ))}
           </ol>
@@ -297,17 +351,20 @@ function Home() {
 
       {/* Testimonials */}
       {data.testimonials.length ? (
-        <section className="bg-secondary/50 py-16 sm:py-20">
+        <section className="bg-secondary/50 py-16 sm:py-24">
           <div className="container-page">
             <SectionHeading eyebrow="Clients" title="What our customers say" align="center" />
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {data.testimonials.map((t) => (
-                <figure key={t.id} className="flex flex-col border border-border bg-card p-6">
-                  <Quote className="h-5 w-5 text-accent" />
-                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                <figure
+                  key={t.id}
+                  className="flex flex-col rounded-md border border-border bg-card p-6 transition-colors hover:border-accent/40"
+                >
+                  <Quote className="h-6 w-6 text-accent" />
+                  <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {t.content}
                   </blockquote>
-                  <div className="mt-4 flex items-center gap-1 text-accent">
+                  <div className="mt-5 flex items-center gap-1 text-accent">
                     {Array.from({ length: t.rating }).map((_, index) => (
                       <Star key={index} className="h-3.5 w-3.5 fill-current" />
                     ))}
@@ -325,7 +382,7 @@ function Home() {
 
       {/* Gallery */}
       {data.gallery.length ? (
-        <section className="container-page py-16 sm:py-20">
+        <section className="container-page py-16 sm:py-24">
           <SectionHeading
             eyebrow="Our work"
             title="Recent installations"
@@ -337,14 +394,14 @@ function Home() {
               </Button>
             }
           />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {data.gallery.map((item) => (
-              <figure key={item.id} className="group overflow-hidden border border-border bg-card">
+              <figure key={item.id} className="group overflow-hidden rounded-md border border-border bg-card">
                 <MediaImage
                   src={item.image_url}
                   alt={item.title}
                   className="aspect-[4/3] w-full"
-                  imgClassName="transition-transform duration-300 group-hover:scale-105"
+                  imgClassName="transition-transform duration-500 group-hover:scale-105"
                 />
                 <figcaption className="p-4 text-sm font-semibold">{item.title}</figcaption>
               </figure>
@@ -355,9 +412,9 @@ function Home() {
 
       {/* FAQ */}
       {data.faqs.length ? (
-        <section className="container-page pb-16 sm:pb-20">
+        <section className="container-page pb-16 sm:pb-24">
           <SectionHeading eyebrow="Questions" title="Frequently asked questions" />
-          <Accordion type="single" collapsible className="mt-8 border-t border-border">
+          <Accordion type="single" collapsible className="mt-10 border-t border-border">
             {data.faqs.map((faq) => (
               <AccordionItem key={faq.id} value={faq.id}>
                 <AccordionTrigger className="text-left text-[0.95rem] font-semibold">
@@ -376,10 +433,13 @@ function Home() {
       ) : null}
 
       {/* Final CTA */}
-      <section className="bg-accent text-accent-foreground">
-        <div className="container-page flex flex-col items-start justify-between gap-6 py-14 sm:flex-row sm:items-center">
+      <section className="relative isolate overflow-hidden bg-accent text-accent-foreground">
+        <div className="grid-backdrop absolute inset-0 opacity-30" aria-hidden="true" />
+        <div className="relative container-page flex flex-col items-start justify-between gap-6 py-16 sm:flex-row sm:items-center">
           <div>
-            <h2 className="text-2xl font-bold sm:text-3xl">{cta?.title ?? "Ready to secure your property?"}</h2>
+            <h2 className="text-2xl font-bold text-balance sm:text-3xl">
+              {cta?.title ?? "Ready to secure your property?"}
+            </h2>
             <p className="mt-2 max-w-2xl text-sm text-accent-foreground/85">
               {cta?.body ?? "Tell us about your site and our engineers will design the right system for you."}
             </p>
