@@ -113,16 +113,15 @@ function Home() {
               className="reveal mt-6 max-w-3xl text-pretty text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.6rem]"
               style={{ animationDelay: "80ms" }}
             >
-              {hero?.title ?? "Protect what matters with professionally installed security systems"}
+              {hero?.title ?? "Protect what matters most"}
             </h1>
-            {hero?.body ? (
-              <p
-                className="reveal mt-6 max-w-2xl text-base leading-relaxed text-surface-foreground/80 sm:text-lg"
-                style={{ animationDelay: "160ms" }}
-              >
-                {hero.body}
-              </p>
-            ) : null}
+            <p
+              className="reveal mt-6 max-w-2xl text-base leading-relaxed text-surface-foreground/80 sm:text-lg"
+              style={{ animationDelay: "160ms" }}
+            >
+              {hero?.body ??
+                "Expertly designed and installed CCTV, access control and monitoring systems for homes and businesses — backed by round-the-clock support and a team you can trust."}
+            </p>
             <p
               className="reveal eyebrow mt-6 text-accent"
               style={{ animationDelay: "160ms" }}
