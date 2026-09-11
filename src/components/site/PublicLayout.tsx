@@ -26,12 +26,12 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="border-b border-border bg-surface text-surface-foreground">
-      <div className="container-page py-12 sm:py-16">
-        {eyebrow ? <p className="eyebrow text-accent">{eyebrow}</p> : null}
-        <h1 className="mt-2 max-w-3xl text-3xl font-bold sm:text-4xl lg:text-[2.75rem]">{title}</h1>
+    <section className="border-b border-border bg-surface">
+      <div className="container-page py-14 sm:py-20">
+        {eyebrow ? <p className="eyebrow text-primary">{eyebrow}</p> : null}
+        <h1 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">{title}</h1>
         {subtitle ? (
-          <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-surface-foreground/75">{subtitle}</p>
+          <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-muted-foreground">{subtitle}</p>
         ) : null}
         {children ? <div className="mt-6">{children}</div> : null}
       </div>

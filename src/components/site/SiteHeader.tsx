@@ -20,6 +20,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const FALLBACK_NAV = [
+  { id: "home", label: "Home", url: "/" },
+  { id: "services", label: "Services", url: "/services" },
+  { id: "projects", label: "Projects", url: "/gallery" },
+  { id: "about", label: "About", url: "/about" },
+  { id: "contact", label: "Contact", url: "/contact" },
+];
+
 export function SiteHeader() {
   const { navigation, announcement } = useSite();
   const { user } = useAuth();
@@ -73,16 +81,7 @@ export function SiteHeader() {
     setMobileOpen(false);
   }
 
-  const items = navigation.length
-    ? navigation
-    : [
-        { id: "1", label: "Home", url: "/" },
-        { id: "2", label: "Products", url: "/products" },
-        { id: "3", label: "Services", url: "/services" },
-        { id: "4", label: "About", url: "/about" },
-        { id: "5", label: "Gallery", url: "/gallery" },
-        { id: "6", label: "Contact", url: "/contact" },
-      ];
+  const items = navigation.length ? navigation : FALLBACK_NAV;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">
@@ -101,20 +100,24 @@ export function SiteHeader() {
       ) : null}
 
       <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <Logo />
-          <nav className="hidden items-center gap-1 lg:flex">
-            {items.map((item) => (
-              <a
-                key={item.id}
-                href={item.url}
-                className={`rounded-sm px-3 py-2 text-sm font-semibold transition-colors hover:bg-secondary ${
-                  pathname === item.url ? "text-accent" : "text-foreground"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+            {items.map((item) => {
+              const active = pathname === item.url || (item.url !== "/" && pathname.startsWith(item.url));
+              return (
+                <a
+                  key={item.id}
+                  href={item.url}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-foreground ${
+                    active ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </nav>
         </div>
 
@@ -140,7 +143,7 @@ export function SiteHeader() {
             <Link to="/cart">
               <ShoppingCart className="h-5 w-5" />
               {count > 0 ? (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[0.65rem] font-bold text-accent-foreground">
+                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[0.65rem] font-bold text-primary-foreground">
                   {count}
                 </span>
               ) : null}
@@ -153,7 +156,7 @@ export function SiteHeader() {
                 <Link to="/account/notifications">
                   <Bell className="h-5 w-5" />
                   {(notifications.data ?? 0) > 0 ? (
-                    <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[0.65rem] font-bold text-accent-foreground">
+                    <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[0.65rem] font-bold text-primary-foreground">
                       {notifications.data}
                     </span>
                   ) : null}
@@ -203,8 +206,8 @@ export function SiteHeader() {
             </Button>
           )}
 
-          <Button asChild className="hidden bg-accent text-accent-foreground hover:bg-accent/90 md:inline-flex">
-            <Link to="/request-service">Request Service</Link>
+          <Button asChild className="hidden bg-primary px-5 text-primary-foreground shadow-sm hover:bg-primary/90 md:inline-flex">
+            <Link to="/request-service">Get Free Quote</Link>
           </Button>
 
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -248,8 +251,8 @@ export function SiteHeader() {
                     {resolved === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
                     {resolved === "dark" ? "Light mode" : "Dark mode"}
                   </Button>
-                  <Button asChild className="h-11 bg-accent text-accent-foreground hover:bg-accent/90">
-                    <Link to="/request-service">Request Service</Link>
+                  <Button asChild className="h-11 bg-primary text-primary-foreground hover:bg-primary/90">
+                    <Link to="/request-service">Get Free Quote</Link>
                   </Button>
                   {user ? (
                     <>
