@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Instagram, Mail, MapPin, Music2, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { submitContactMessage } from "@/lib/public.functions";
@@ -35,6 +35,12 @@ const schema = z.object({
   subject: z.string().trim().max(160).optional(),
   message: z.string().trim().min(10, "Tell us a bit more (10+ characters)").max(3000),
 });
+
+const SOCIALS = [
+  { name: "TikTok", handle: "@adsecurtycamera", url: "https://tiktok.com/@adsecurtycamera", icon: Music2 },
+  { name: "Instagram", handle: "@adsecurtycamera", url: "https://instagram.com/adsecurtycamera", icon: Instagram },
+  { name: "Telegram", handle: "@adsecurtycamera", url: "https://t.me/adsecurtycamera", icon: Send },
+];
 
 function ContactPage() {
   const { contact, socialLinks } = useSite();
@@ -172,14 +178,35 @@ function ContactPage() {
                     href={link.url}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="rounded-sm border border-border px-3 py-1.5 text-xs font-semibold hover:border-accent hover:text-accent"
+                    className="inline-flex items-center gap-1.5 rounded-sm border border-border px-2.5 py-1.5 text-xs font-semibold hover:border-accent hover:text-accent"
                   >
                     {link.platform}
                   </a>
                 ))}
               </div>
             </div>
-          ) : null}
+          ) : (
+            <div className="border border-border bg-card p-6">
+              <h2 className="text-sm font-bold uppercase tracking-wide">Follow us</h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {SOCIALS.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="inline-flex items-center gap-1.5 rounded-sm border border-border px-2.5 py-1.5 text-xs font-semibold hover:border-accent hover:text-accent"
+                    >
+                      <Icon className="h-4 w-4" />
+                      {social.handle}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </aside>
       </div>
     </PublicLayout>

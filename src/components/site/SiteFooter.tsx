@@ -1,17 +1,23 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Instagram, Mail, MapPin, Music2, Phone, Send } from "lucide-react";
 import { useSite } from "@/lib/site-context";
 import { Logo } from "./Logo";
 
 type FooterLink = { label: string; url: string };
 
 const FALLBACK_SERVICES: FooterLink[] = [
-  { label: "CCTV Installation", url: "/services" },
-  { label: "Security Camera Systems", url: "/services" },
-  { label: "Access Control", url: "/services" },
-  { label: "Networking Solutions", url: "/services" },
+  { label: "Surveillance Systems", url: "/services" },
+  { label: "Access Management", url: "/services" },
+  { label: "Network Infrastructure", url: "/services" },
   { label: "Remote Monitoring", url: "/services" },
-  { label: "Maintenance & Support", url: "/services" },
+  { label: "Maintenance", url: "/services" },
+  { label: "Security Consulting", url: "/services" },
+];
+
+const SOCIALS = [
+  { name: "TikTok", handle: "@adsecurtycamera", url: "https://tiktok.com/@adsecurtycamera", icon: Music2 },
+  { name: "Instagram", handle: "@adsecurtycamera", url: "https://instagram.com/adsecurtycamera", icon: Instagram },
+  { name: "Telegram", handle: "@adsecurtycamera", url: "https://t.me/adsecurtycamera", icon: Send },
 ];
 
 const FALLBACK_COMPANY: FooterLink[] = [
@@ -36,20 +42,39 @@ export function SiteFooter() {
             {footerSettings.description || branding.description}
           </p>
           {socialLinks.length ? (
-            <div className="mt-6 flex gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {socialLinks.map((link) => (
                 <a
                   key={link.id}
                   href={link.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="rounded-md border border-border bg-background px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary"
                 >
                   {link.platform}
                 </a>
               ))}
             </div>
-          ) : null}
+          ) : (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {SOCIALS.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`${social.name} (${social.handle})`}
+                    className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {social.name}
+                  </a>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className="lg:col-span-2">
